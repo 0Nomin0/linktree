@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Design, Link, QuickSettings } from "@/lib/types";
 import { SocialIcon, ICON_BG } from "./SocialIcons";
-import { detectClient, tryEscape, type Escape } from "./escape";
+import { detectClient, type Escape } from "./escape";
 import { bgValue, radiusValue, cardStyle } from "./PhonePreview";
 import styles from "./ProfileView.module.css";
 
@@ -28,7 +28,6 @@ export default function ProfileView({
 }) {
   const [esc, setEsc] = useState<Escape | null>(null);
   const [showHint, setShowHint] = useState(false);
-  const [hintUrl, setHintUrl] = useState("");
   const [tab, setTab] = useState<"shouts" | "media">("shouts");
   const heroRef = useRef<HTMLElement | null>(null);
   const dimRef = useRef<HTMLDivElement | null>(null);
@@ -97,11 +96,9 @@ export default function ProfileView({
     track(link.id);
     const env = esc ?? detectClient();
     if (link.force_external && env.inApp) {
-      const escaped = tryEscape(link.url, env);
-      if (!escaped) {
-        setHintUrl(link.url);
-        setShowHint(true);
-      }
+      // В любом встроенном браузере (iOS и Android) переход запрещён —
+      // показываем только инструкцию открыть страницу во внешнем браузере.
+      setShowHint(true);
     } else {
       window.location.href = link.url;
     }
@@ -243,14 +240,8 @@ export default function ProfileView({
             <div className={styles.hintArrow}>↗</div>
             <h3>Open in your browser</h3>
             <p>
-              Tap «<b>•••</b>» at the top and choose <b>“Open in Safari”</b> so the link
-              works correctly.
+              Tap «<b>•••</b>» at the top and choose <b>“Open in browser”</b> to continue.
             </p>
-            {hintUrl && (
-              <a className={styles.hintLink} href={hintUrl} target="_blank" rel="noopener noreferrer">
-                Continue anyway
-              </a>
-            )}
             <button className={styles.hintClose} onClick={() => setShowHint(false)}>
               Got it
             </button>

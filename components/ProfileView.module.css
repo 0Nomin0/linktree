@@ -484,17 +484,6 @@
   line-height: 1.5;
   color: #444;
 }
-.hintLink {
-  display: block;
-  text-align: center;
-  width: 100%;
-  padding: 11px;
-  margin-bottom: 8px;
-  border-radius: 10px;
-  background: #f0f0f0;
-  color: #111;
-  font-weight: 600;
-}
 .hintClose {
   width: 100%;
   padding: 12px;

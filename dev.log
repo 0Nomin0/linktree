@@ -1,0 +1,29 @@
+   ▲ Next.js 15.1.6
+   - Local:        http://localhost:80
+   - Network:      http://10.0.5.42:80
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1523ms
+ ○ Compiling /[username] ...
+ ✓ Compiled /[username] in 1220ms (619 modules)
+ GET /mia_moon 200 in 1850ms
+ GET /mia_moon 200 in 35ms
+ GET /favicon.ico 404 in 25ms
+ GET /mia_moon 200 in 23ms
+ GET /favicon.ico 404 in 20ms
+ GET /mia_moon 200 in 113ms
+ GET /favicon.ico 404 in 19ms
+ ✓ Compiled /admin/[username] in 491ms (654 modules)
+ GET /admin/mia_moon 200 in 998ms
+ GET /favicon.ico 404 in 39ms
+ GET /admin/mia_moon 200 in 31ms
+ GET /favicon.ico 404 in 27ms
+ ✓ Compiled /admin in 181ms (665 modules)
+ GET /admin 200 in 242ms
+ GET /admin/mia_moon 200 in 19ms
+ GET /mia_moon 200 in 134ms
+ ✓ Compiled /api/track in 195ms (683 modules)
+ POST /api/track 200 in 318ms
+ GET /mia_moon 200 in 132ms
+ GET /favicon.ico 404 in 19ms

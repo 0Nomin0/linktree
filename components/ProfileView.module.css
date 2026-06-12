@@ -1,0 +1,495 @@
+.root {
+  position: relative;
+  min-height: 100dvh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* На телефоне панель во весь экран (как в LinkMe): без полей и скруглений сверху */
+@media (max-width: 600px) {
+  .panel {
+    max-width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    min-height: 100dvh;
+  }
+  .pinnedBar {
+    width: 100% !important;
+  }
+  .hero {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+/* hero-фон: размытое главное фото на весь экран (вынесено в свой слой — не тормозит скролл) */
+.bgHero {
+  background-size: cover;
+  background-position: center top;
+  filter: blur(26px) saturate(1.15);
+  transform: scale(1.18) translateZ(0);
+  will-change: transform;
+}
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.55) 100%);
+}
+/* затухание hero-фона книзу: сверху прозрачно → книзу чёрный фон страницы */
+.scrimHero {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 8, 11, 0.15) 0%,
+    rgba(8, 8, 11, 0.35) 45%,
+    rgba(8, 8, 11, 0.85) 80%,
+    #08080b 100%
+  );
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 0 40px;
+  min-height: 100dvh;
+}
+
+/* компактная закреплённая шапка при скролле */
+.pinnedBar {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  width: 540px;
+  max-width: 100%;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: rgba(0, 0, 0, 0.92);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.pinnedShow {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+.pinnedAvatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.pinnedName {
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+}
+
+/* единая панель профиля (hero-режим) — единый чёрный фон */
+.panel {
+  position: relative;
+  z-index: 2;
+  max-width: 540px;
+  margin: 20px auto 30px;
+  background: #000;
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 56px 20px 20px;
+  text-align: center;
+}
+
+/* ── HERO header (большое главное фото, вплотную к верху панели) ── */
+.hero {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+.heroImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* затемнение фото при скролле (opacity управляется из JS) */
+.scrollDim {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+}
+/* плавный переход фото в единый чёрный фон панели — без видимого шва */
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 40%,
+    rgba(0, 0, 0, 0.45) 72%,
+    rgba(0, 0, 0, 0.92) 92%,
+    #000 100%
+  );
+}
+.heroContent {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 16px 22px;
+  text-align: center;
+}
+.heroName {
+  font-size: 30px;
+  font-weight: 800;
+  margin: 0 0 2px;
+  color: #fff;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
+}
+.heroUser {
+  font-size: 15px;
+  opacity: 0.9;
+  margin: 0 0 6px;
+  color: #fff;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
+}
+.avatarWrap {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.avatarPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 38px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #444, #222);
+  color: #fff;
+}
+.name {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 14px 0 2px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+.username {
+  font-size: 14px;
+  opacity: 0.8;
+  margin: 0 0 4px;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+.socials {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+.socialBtn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  transition: transform 0.12s ease;
+}
+.socialBtn:active {
+  transform: scale(0.9);
+}
+
+.deeplinkBanner {
+  display: block;
+  position: relative;
+  z-index: 3;
+  max-width: 440px;
+  width: calc(100% - 32px);
+  margin: 12px auto 0;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(40, 40, 50, 0.92);
+  color: #fff;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+}
+.followers {
+  font-size: 13px;
+  opacity: 0.9;
+  margin: 6px 0 0;
+}
+
+/* ── Cards ── */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 8px 16px;
+}
+.cardLink {
+  display: block;
+  transition: transform 0.12s ease;
+}
+.cardLink:active {
+  transform: scale(0.98);
+}
+.cardBig,
+.cardMedium {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+.cardBig {
+  aspect-ratio: 16 / 11;
+}
+.cardMedium {
+  aspect-ratio: 16 / 6;
+}
+.cardBig img,
+.cardMedium img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.cardButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px;
+  font-weight: 600;
+  font-size: 16px;
+}
+.btnIcon {
+  display: inline-flex;
+}
+.cardSmall {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 13px;
+}
+.smallThumb {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.smallIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+.smallTitle {
+  font-weight: 600;
+  font-size: 15px;
+}
+.card {
+  display: block;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.12s ease;
+}
+.card:active {
+  transform: scale(0.98);
+}
+.cardTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px;
+  font-weight: 600;
+  font-size: 16px;
+}
+.cardInlineIcon {
+  display: inline-flex;
+}
+.cardImage {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 11;
+}
+.cardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.cardImageTitle {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+.cardCorner {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+
+/* ── Tabs ── */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding-bottom: 0;
+}
+.tab,
+.tabActive {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 14px;
+  padding: 10px 4px;
+  opacity: 0.6;
+  position: relative;
+}
+.tabActive {
+  opacity: 1;
+  font-weight: 700;
+}
+.tabActive::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: currentColor;
+}
+.tabBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 36px 20px 30px;
+}
+.emptyIcon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+.empty {
+  font-weight: 700;
+  margin: 0;
+}
+.emptySub {
+  margin: 6px 0 0;
+  font-size: 13px;
+  opacity: 0.5;
+  text-align: center;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 12px;
+  opacity: 0.45;
+  padding: 8px 20px 22px;
+}
+.footer a:hover {
+  opacity: 0.9;
+  text-decoration: underline;
+}
+
+/* ── iOS hint overlay ── */
+.hintOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 12px;
+}
+.hintCard {
+  background: #fff;
+  color: #111;
+  border-radius: 16px;
+  padding: 20px;
+  max-width: 300px;
+  margin-top: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+.hintArrow {
+  position: absolute;
+  top: 2px;
+  right: 24px;
+  font-size: 32px;
+  color: #fff;
+  animation: bounce 1s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.hintCard h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+.hintCard p {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #444;
+}
+.hintClose {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #111;
+  color: #fff;
+  font-weight: 600;
+}

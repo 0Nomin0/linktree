@@ -1,0 +1,364 @@
+.phone {
+  width: 360px;
+  height: 740px;
+  border-radius: 40px;
+  padding: 10px;
+  background: #000;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 0 2px #1c1c26;
+  position: relative;
+}
+.screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 32px;
+  overflow: hidden;
+  position: relative;
+}
+.bg {
+  position: absolute;
+  inset: 0;
+}
+.bgHero {
+  background-size: cover;
+  background-position: center top;
+  filter: blur(28px) saturate(1.2);
+  transform: scale(1.2);
+}
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.55));
+}
+.scrimHero {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 8, 11, 0.12) 0%,
+    rgba(8, 8, 11, 0.32) 45%,
+    rgba(8, 8, 11, 0.85) 80%,
+    #08080b 100%
+  );
+}
+
+/* HERO header в превью — вплотную к верху экрана */
+.hero {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+}
+.heroImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.4) 65%, rgba(0,0,0,0.85) 100%);
+}
+.heroContent {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 14px 18px;
+  text-align: center;
+}
+.heroName {
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
+}
+.heroUser {
+  font-size: 13px;
+  opacity: 0.9;
+  margin-top: 2px;
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+.inner {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  padding-bottom: 24px;
+}
+.inner::-webkit-scrollbar {
+  width: 0;
+}
+
+.deeplinkBanner {
+  margin: 10px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(6px);
+  font-size: 11px;
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 34px 16px 14px;
+  text-align: center;
+}
+.avatar {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: #2a2a36;
+  display: grid;
+  place-items: center;
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.avatar span {
+  font-size: 34px;
+  font-weight: 700;
+}
+.name {
+  font-size: 23px;
+  font-weight: 800;
+  margin-top: 12px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+.bio {
+  font-size: 13px;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+.followers {
+  font-size: 12px;
+  opacity: 0.9;
+  margin-top: 6px;
+}
+.socials {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+.social {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 6px 14px;
+}
+.placeholder {
+  text-align: center;
+  opacity: 0.6;
+  font-size: 13px;
+  padding: 20px;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+}
+
+/* редактируемая карточка в превью */
+.editCard {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+.editCard:hover {
+  filter: brightness(1.08);
+}
+.editHint {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.editCard:hover .editHint {
+  opacity: 1;
+}
+.addTile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px;
+  border: 1.5px dashed rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+.addTile:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.addPlus {
+  font-size: 18px;
+}
+
+.cardBig,
+.cardMedium {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+.cardBig {
+  aspect-ratio: 16 / 11;
+}
+.cardMedium {
+  aspect-ratio: 16 / 6;
+}
+.cardBig img,
+.cardMedium img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.imgTitle {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+.imgCorner {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+
+.cardButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  font-weight: 600;
+  font-size: 15px;
+}
+.btnIcon {
+  display: inline-flex;
+}
+
+.cardSmall {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+}
+.smallThumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.smallIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+.smallTitle {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+.tab,
+.tabActive {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 13px;
+  padding: 9px 4px;
+  opacity: 0.6;
+  position: relative;
+}
+.tabActive {
+  opacity: 1;
+  font-weight: 700;
+}
+.tabActive::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 2px;
+  background: currentColor;
+}
+.tabBody {
+  text-align: center;
+  padding: 28px 20px 22px;
+}
+.emptyIcon {
+  font-size: 34px;
+  margin-bottom: 8px;
+}
+.emptyTitle {
+  font-weight: 700;
+  font-size: 14px;
+}
+.emptySub {
+  font-size: 11.5px;
+  opacity: 0.5;
+  margin-top: 4px;
+}
+.footer {
+  text-align: center;
+  font-size: 10.5px;
+  opacity: 0.4;
+  padding: 6px 14px 16px;
+}
+
+/* масштаб для встраивания в редактор */
+.scaled {
+  transform: scale(0.92);
+  transform-origin: top center;
+}

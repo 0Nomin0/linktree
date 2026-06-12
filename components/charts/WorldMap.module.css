@@ -1,0 +1,120 @@
+.wrap {
+  position: relative;
+  width: 100%;
+  background: #0c0c11;
+  border: 1px solid #1c1c26;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  touch-action: none;
+}
+
+.country {
+  fill: #ffffff;
+  transition: fill 0.15s;
+}
+.country:hover {
+  fill: #e2e8f0;
+}
+.activeCountry {
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+.activeCountry:hover {
+  filter: brightness(1.25);
+}
+
+.controls {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 3;
+}
+.ctrlBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  border: 1px solid #2a2a36;
+  background: #14141c;
+  color: #cbd5e1;
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.ctrlBtn:hover {
+  background: #1f2533;
+  color: #fff;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  background: rgba(13, 17, 28, 0.95);
+  border: 1px solid #243049;
+  border-radius: 12px;
+  padding: 12px 14px;
+  min-width: 150px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+}
+.tipHead {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 8px;
+  color: #fff;
+}
+.tipRow {
+  font-size: 13px;
+  color: #9fb0c8;
+  margin: 2px 0;
+}
+.tipRow b {
+  color: #5fb0f0;
+}
+.tipLevel {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.lvlLOW { color: #4ade80; }
+.lvlMEDIUM { color: #fbbf24; }
+.lvlHIGH { color: #f87171; }
+
+.legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px;
+  font-size: 12px;
+  color: #8a93a6;
+  letter-spacing: 0.04em;
+  border-top: 1px solid #16161f;
+}
+.legLow,
+.legHigh {
+  color: #aeb6c5;
+}
+.ramp {
+  display: inline-flex;
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #2a2a36;
+}
+.ramp i {
+  display: block;
+  width: 26px;
+  height: 100%;
+}

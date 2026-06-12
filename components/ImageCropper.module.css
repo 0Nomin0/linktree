@@ -1,0 +1,93 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.7);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+.modal {
+  background: #14141c;
+  border: 1px solid #26262f;
+  border-radius: 18px;
+  padding: 20px;
+  width: min(380px, 100%);
+}
+.title {
+  margin: 0 0 14px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+}
+.view {
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #000;
+  cursor: grab;
+  touch-action: none;
+}
+.view:active {
+  cursor: grabbing;
+}
+.img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: none;
+  user-select: none;
+  pointer-events: none;
+}
+.grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.25) 1px, transparent 1px);
+  background-size: 33.33% 33.33%;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+.zoomRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0 4px;
+  color: #9a9aa8;
+}
+.range {
+  flex: 1;
+  accent-color: #5b5bff;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.btnGhost {
+  flex: 1;
+  padding: 11px;
+  border-radius: 10px;
+  border: 1px solid #2a2a36;
+  background: transparent;
+  color: #d8d8e2;
+  cursor: pointer;
+  font-size: 14px;
+}
+.btnPrimary {
+  flex: 1;
+  padding: 11px;
+  border-radius: 10px;
+  border: none;
+  background: #5b5bff;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+}
+.btnPrimary:disabled {
+  opacity: 0.5;
+}

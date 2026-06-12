@@ -74,7 +74,6 @@ export function tryEscape(url: string, esc: Escape): boolean {
   }
 
   // iOS: вложенный webview нельзя форсированно покинуть.
-  // Открываем ссылку (останется в webview) — подсказку показываем отдельно.
-  window.location.href = url;
+  // Не навигируем — вызывающий код показывает подсказку «открыть в Safari».
   return false;
 }

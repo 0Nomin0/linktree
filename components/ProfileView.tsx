@@ -28,6 +28,7 @@ export default function ProfileView({
 }) {
   const [esc, setEsc] = useState<Escape | null>(null);
   const [showHint, setShowHint] = useState(false);
+  const [hintUrl, setHintUrl] = useState("");
   const [tab, setTab] = useState<"shouts" | "media">("shouts");
   const heroRef = useRef<HTMLElement | null>(null);
   const dimRef = useRef<HTMLDivElement | null>(null);
@@ -98,8 +99,8 @@ export default function ProfileView({
     if (link.force_external && env.inApp) {
       const escaped = tryEscape(link.url, env);
       if (!escaped) {
+        setHintUrl(link.url);
         setShowHint(true);
-        setTimeout(() => (window.location.href = link.url), 50);
       }
     } else {
       window.location.href = link.url;
@@ -143,7 +144,7 @@ export default function ProfileView({
             {profile.bio && <p className={styles.heroUser}>{profile.bio}</p>}
             {settings.totalFollowers && (
               <p className={styles.followers}>
-                <b>{settings.followersCount.toLocaleString()}</b> подписчиков
+                <b>{settings.followersCount.toLocaleString()}</b> followers
               </p>
             )}
             {socialsRow}
@@ -164,7 +165,7 @@ export default function ProfileView({
           {profile.bio && <p className={styles.username}>{profile.bio}</p>}
           {settings.totalFollowers && (
             <p className={styles.followers}>
-              <b>{settings.followersCount.toLocaleString()}</b> подписчиков
+              <b>{settings.followersCount.toLocaleString()}</b> followers
             </p>
           )}
           {socialsRow}
@@ -226,7 +227,7 @@ export default function ProfileView({
 
       {settings.deeplinkBanner && esc?.inApp && (
         <button className={styles.deeplinkBanner} onClick={() => setShowHint(true)}>
-          ↗ Открыть в браузере для лучшего опыта
+          ↗ Open in browser for the best experience
         </button>
       )}
 
@@ -240,13 +241,18 @@ export default function ProfileView({
         <div className={styles.hintOverlay} onClick={() => setShowHint(false)}>
           <div className={styles.hintCard} onClick={(e) => e.stopPropagation()}>
             <div className={styles.hintArrow}>↗</div>
-            <h3>Откройте в браузере</h3>
+            <h3>Open in your browser</h3>
             <p>
-              Нажмите «<b>•••</b>» вверху и выберите <b>«Открыть в Safari»</b>, чтобы ссылка
-              работала корректно.
+              Tap «<b>•••</b>» at the top and choose <b>“Open in Safari”</b> so the link
+              works correctly.
             </p>
+            {hintUrl && (
+              <a className={styles.hintLink} href={hintUrl} target="_blank" rel="noopener noreferrer">
+                Continue anyway
+              </a>
+            )}
             <button className={styles.hintClose} onClick={() => setShowHint(false)}>
-              Понятно
+              Got it
             </button>
           </div>
         </div>
@@ -270,7 +276,7 @@ function CardBody({ link, design, radius }: { link: Link; design: Design; radius
             <SocialIcon icon={link.icon} size={16} />
           </span>
         ) : null}
-        <span className={styles.smallTitle}>{link.title || "Ссылка"}</span>
+        <span className={styles.smallTitle}>{link.title || "Link"}</span>
       </div>
     );
   }
@@ -283,7 +289,7 @@ function CardBody({ link, design, radius }: { link: Link; design: Design; radius
             <SocialIcon icon={link.icon} size={18} />
           </span>
         )}
-        <span>{link.title || "Ссылка"}</span>
+        <span>{link.title || "Link"}</span>
       </div>
     );
   }

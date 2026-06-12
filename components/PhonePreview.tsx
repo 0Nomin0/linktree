@@ -88,7 +88,7 @@ export default function PhonePreview({
         <div className={hero ? s.scrimHero : s.scrim} />
         <div className={s.inner}>
           {settings.deeplinkBanner && (
-            <div className={s.deeplinkBanner}>↗ Открыть в браузере для лучшего опыта</div>
+            <div className={s.deeplinkBanner}>↗ Open in browser for the best experience</div>
           )}
 
           {hero ? (
@@ -101,11 +101,11 @@ export default function PhonePreview({
               <img src={profile.avatar_url} alt="" className={s.heroImg} />
               <div className={s.heroOverlay} />
               <div className={s.heroContent}>
-                <div className={s.heroName}>{profile.display_name || "Имя"}</div>
+                <div className={s.heroName}>{profile.display_name || "Name"}</div>
                 {profile.bio && <div className={s.heroUser}>{profile.bio}</div>}
                 {settings.totalFollowers && (
                   <div className={s.followers}>
-                    <b>{settings.followersCount.toLocaleString()}</b> подписчиков
+                    <b>{settings.followersCount.toLocaleString()}</b> followers
                   </div>
                 )}
                 {socialsRow}
@@ -125,11 +125,11 @@ export default function PhonePreview({
                   <span>{(profile.display_name || "?").slice(0, 1)}</span>
                 )}
               </div>
-              <div className={s.name}>{profile.display_name || "Имя"}</div>
+              <div className={s.name}>{profile.display_name || "Name"}</div>
               {profile.bio && <div className={s.bio}>{profile.bio}</div>}
               {settings.totalFollowers && (
                 <div className={s.followers}>
-                  <b>{settings.followersCount.toLocaleString()}</b> подписчиков
+                  <b>{settings.followersCount.toLocaleString()}</b> followers
                 </div>
               )}
               {socialsRow}
@@ -204,7 +204,7 @@ function PreviewCard({ link, design, radius }: { link: Link; design: Design; rad
             <SocialIcon icon={link.icon} size={16} />
           </span>
         ) : null}
-        <span className={s.smallTitle}>{link.title || "Ссылка"}</span>
+        <span className={s.smallTitle}>{link.title || "Link"}</span>
       </div>
     );
   }
@@ -217,7 +217,7 @@ function PreviewCard({ link, design, radius }: { link: Link; design: Design; rad
             <SocialIcon icon={link.icon} size={18} />
           </span>
         )}
-        <span>{link.title || "Ссылка"}</span>
+        <span>{link.title || "Link"}</span>
       </div>
     );
   }
